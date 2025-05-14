@@ -21,6 +21,10 @@
   width: 400px;
 }
 
+.form-btns {
+  margin-left: 20px;
+}
+
 .form-btns button {
   cursor: pointer;
   border: 2px solid gray;
