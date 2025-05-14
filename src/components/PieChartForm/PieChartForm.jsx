@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import styles from "./PieChartForm.module.css";
+
 export default function PieChartForm({ initialData, onSubmit }) {
 	const [labels, setLabels] = useState(initialData.labels);
 	const [dataPoints, setDataPoints] = useState(initialData.datasets[0].data);
@@ -25,6 +27,11 @@ export default function PieChartForm({ initialData, onSubmit }) {
 		setBackgroundColors(newColors);
 	};
 
+	const addDataPoint = () => {
+		const newLabels = labels.concat(["Новый сегмент"]);
+		setLabels(newLabels);
+	};
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const chartData = {
@@ -42,34 +49,47 @@ export default function PieChartForm({ initialData, onSubmit }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<h3>Настройка Круговой диаграммы</h3>
-			{labels.map((label, index) => (
-				<div key={index}>
-					<label>{`Сегмент ${index + 1} – Метка:`}</label>
-					<input
-						placeholder="Введите имя области"
-						type="text"
-						value={label}
-						onChange={(e) => handleLabelChange(index, e)}
-					/>
-					<label>Значение:</label>
-					<input
-						placeholder="Введите значение области"
-						type="number"
-						value={dataPoints[index]}
-						onChange={(e) => handleDataPointChange(index, e)}
-					/>
-					<label>Цвет:</label>
-					<input
-						placeholder="Введите цвет области"
-						type="text"
-						value={backgroundColors[index]}
-						onChange={(e) => handleColorChange(index, e)}
-					/>
+		<div className={styles["container"]}>
+			<h2>Круговая диаграмма</h2>
+			<form onSubmit={handleSubmit}>
+				<div className={styles["form-body"]}>
+					<h3>Настройка Круговой диаграммы</h3>
+					{labels.map((label, index) => (
+						<div key={index}>
+							<label>{`Сегмент ${index + 1} – Метка:`}</label>
+							<input
+								placeholder="Введите имя сегмента"
+								type="text"
+								value={label}
+								onChange={(e) => handleLabelChange(index, e)}
+								required
+							/>
+							<label>Значение:</label>
+							<input
+								placeholder="Введите значение сегмента"
+								type="number"
+								value={dataPoints[index]}
+								onChange={(e) => handleDataPointChange(index, e)}
+								required
+							/>
+							<label>Цвет:</label>
+							<input
+								placeholder="Задайте цвет сегмента"
+								type="text"
+								value={backgroundColors[index]}
+								onChange={(e) => handleColorChange(index, e)}
+								required
+							/>
+						</div>
+					))}
 				</div>
-			))}
-			<button type="submit">Создать график</button>
-		</form>
+				<div className={styles["form-btns"]}>
+					<button type="submit">Создать график</button>
+					<button type="button" onClick={addDataPoint}>
+						Добавить новый сегмент
+					</button>
+				</div>
+			</form>
+		</div>
 	);
 }

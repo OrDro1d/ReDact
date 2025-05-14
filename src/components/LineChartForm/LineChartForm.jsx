@@ -56,13 +56,14 @@ export default function LineChartForm({ initialData, onSubmit }) {
 			<form className={styles["chart-form"]} onSubmit={handleSubmit}>
 				<div className={styles["form-body"]}>
 					<div className={styles["form-parameters-block"]}>
-						<h3>Настройка линейного графика</h3>
+						<h3>Настройка Линейного графика</h3>
 						<div className={styles["parameters-input"]}>
 							<label>Название набора данных:</label>
 							<input
 								type="text"
 								value={datasetLabel}
 								onChange={(e) => setDatasetLabel(e.target.value)}
+								required
 							/>
 						</div>
 						<div className={styles["parameters-input"]}>
@@ -72,15 +73,17 @@ export default function LineChartForm({ initialData, onSubmit }) {
 								type="text"
 								value={borderColor}
 								onChange={(e) => setBorderColor(e.target.value)}
+								required
 							/>
 						</div>
 						<div className={styles["parameters-input"]}>
-							<label>Цвет заливки:</label>
+							<label>Цвет метки:</label>
 							<input
-								placeholder="Задайте цвет заливки"
+								placeholder="Задайте цвет метки"
 								type="text"
 								value={backgroundColor}
 								onChange={(e) => setBackgroundColor(e.target.value)}
+								required
 							/>
 						</div>
 						<div className={styles["form-btns"]}>
@@ -106,6 +109,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 									type="text"
 									value={label}
 									onChange={(e) => handleLabelChange(index, e)}
+									required
 								/>
 								<label>Значение:</label>
 								<input
@@ -113,6 +117,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 									type="number"
 									value={dataPoints[index]}
 									onChange={(e) => handleDataPointChange(index, e)}
+									required
 								/>
 							</div>
 						))}
