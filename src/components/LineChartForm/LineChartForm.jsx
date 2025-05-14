@@ -55,7 +55,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 			<h2>Линейный график</h2>
 			<form className={styles["chart-form"]} onSubmit={handleSubmit}>
 				<div className={styles["form-body"]}>
-					<div className={styles["form-parameters-block"]}>
+					<div className={styles["form-parameters"]}>
 						<h3>Настройка Линейного графика</h3>
 						<div className={styles["parameters-input"]}>
 							<label>Название набора данных:</label>
@@ -99,7 +99,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 							</button>
 						</div>
 					</div>
-					<div className={styles["form-data-block"]}>
+					<div className={styles["form-data"]}>
 						<h3>Данные графика</h3>
 						{labels.map((label, index) => (
 							<div key={index}>

@@ -7,7 +7,7 @@ export default function Header({ onOpenChartForm }) {
 		<header>
 			<div className={styles["logo"]}>
 				<img title="logo" src="/logo.png"></img>
-				<p>ReDact</p>
+				<p>ReDact - онлайн редактирование графиков и диаграмм</p>
 			</div>
 			<ToolsMenu onOpenChartForm={onOpenChartForm}></ToolsMenu>
 		</header>

@@ -27,7 +27,7 @@ export default function PieChartForm({ initialData, onSubmit }) {
 		setBackgroundColors(newColors);
 	};
 
-	const addDataPoint = () => {
+	const addSegment = () => {
 		const newLabels = labels.concat(["Новый сегмент"]);
 		setLabels(newLabels);
 	};
@@ -84,10 +84,10 @@ export default function PieChartForm({ initialData, onSubmit }) {
 					))}
 				</div>
 				<div className={styles["form-btns"]}>
-					<button type="submit">Создать график</button>
-					<button type="button" onClick={addDataPoint}>
+					<button type="button" onClick={addSegment}>
 						Добавить новый сегмент
 					</button>
+					<button type="submit">Создать диаграмму</button>
 				</div>
 			</form>
 		</div>
