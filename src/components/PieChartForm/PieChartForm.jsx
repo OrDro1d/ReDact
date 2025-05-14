@@ -4,8 +4,7 @@ export default function PieChartForm({ initialData, onSubmit }) {
 	const [labels, setLabels] = useState(initialData.labels);
 	const [dataPoints, setDataPoints] = useState(initialData.datasets[0].data);
 	const [backgroundColors, setBackgroundColors] = useState(() => {
-		// Задаём значение по умолчанию для каждого сегмента
-		return initialData.labels.map(() => "rgba(75,192,192,0.4)");
+		return initialData.labels.map(() => "#4bb");
 	});
 
 	const handleLabelChange = (index, event) => {
@@ -44,30 +43,33 @@ export default function PieChartForm({ initialData, onSubmit }) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Настройка Pie Chart</h3>
+			<h3>Настройка Круговой диаграммы</h3>
 			{labels.map((label, index) => (
 				<div key={index}>
 					<label>{`Сегмент ${index + 1} – Метка:`}</label>
 					<input
+						placeholder="Введите имя области"
 						type="text"
 						value={label}
 						onChange={(e) => handleLabelChange(index, e)}
 					/>
 					<label>Значение:</label>
 					<input
+						placeholder="Введите значение области"
 						type="number"
 						value={dataPoints[index]}
 						onChange={(e) => handleDataPointChange(index, e)}
 					/>
 					<label>Цвет:</label>
 					<input
+						placeholder="Введите цвет области"
 						type="text"
 						value={backgroundColors[index]}
 						onChange={(e) => handleColorChange(index, e)}
 					/>
 				</div>
 			))}
-			<button type="submit">Сохранить данные Pie Chart</button>
+			<button type="submit">Создать график</button>
 		</form>
 	);
 }

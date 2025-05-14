@@ -68,6 +68,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 						<div className={styles["parameters-input"]}>
 							<label>Цвет линии:</label>
 							<input
+								placeholder="Задайте цвет линии"
 								type="text"
 								value={borderColor}
 								onChange={(e) => setBorderColor(e.target.value)}
@@ -76,6 +77,7 @@ export default function LineChartForm({ initialData, onSubmit }) {
 						<div className={styles["parameters-input"]}>
 							<label>Цвет заливки:</label>
 							<input
+								placeholder="Задайте цвет заливки"
 								type="text"
 								value={backgroundColor}
 								onChange={(e) => setBackgroundColor(e.target.value)}
@@ -90,22 +92,24 @@ export default function LineChartForm({ initialData, onSubmit }) {
 								Добавить метку
 							</button>
 							<button className={styles["make-chart-btn"]} type="submit">
-								Сохранить данные Line Chart
+								Создать график
 							</button>
 						</div>
 					</div>
 					<div className={styles["form-data-block"]}>
-						<h3>Данные диаграммы</h3>
+						<h3>Данные графика</h3>
 						{labels.map((label, index) => (
 							<div key={index}>
 								<label>{`Метка ${index + 1}:`}</label>
 								<input
+									placeholder="Введите имя метки"
 									type="text"
 									value={label}
 									onChange={(e) => handleLabelChange(index, e)}
 								/>
 								<label>Значение:</label>
 								<input
+									placeholder="Введите значение на метке"
 									type="number"
 									value={dataPoints[index]}
 									onChange={(e) => handleDataPointChange(index, e)}
