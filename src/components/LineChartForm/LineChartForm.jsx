@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import styles from "./LineChartForm.module.css";
+
 export default function LineChartForm({ initialData, onSubmit }) {
 	const [labels, setLabels] = useState(initialData.labels);
 	const [dataPoints, setDataPoints] = useState(initialData.datasets[0].data);
@@ -25,6 +27,11 @@ export default function LineChartForm({ initialData, onSubmit }) {
 		setDataPoints(newDataPoints);
 	};
 
+	const addMark = () => {
+		const newLabels = labels.concat(["Новая метка"]);
+		setLabels(newLabels);
+	};
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const chartData = {
@@ -44,50 +51,70 @@ export default function LineChartForm({ initialData, onSubmit }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<h3>Настройка Line Chart</h3>
-			<div>
-				<label>Название набора данных:</label>
-				<input
-					type="text"
-					value={datasetLabel}
-					onChange={(e) => setDatasetLabel(e.target.value)}
-				/>
-			</div>
-			<div>
-				<label>Цвет линии (borderColor):</label>
-				<input
-					type="text"
-					value={borderColor}
-					onChange={(e) => setBorderColor(e.target.value)}
-				/>
-			</div>
-			<div>
-				<label>Цвет заливки (backgroundColor):</label>
-				<input
-					type="text"
-					value={backgroundColor}
-					onChange={(e) => setBackgroundColor(e.target.value)}
-				/>
-			</div>
-			<h4>Данные диаграммы</h4>
-			{labels.map((label, index) => (
-				<div key={index}>
-					<label>{`Метка ${index + 1}:`}</label>
-					<input
-						type="text"
-						value={label}
-						onChange={(e) => handleLabelChange(index, e)}
-					/>
-					<label>Значение:</label>
-					<input
-						type="number"
-						value={dataPoints[index]}
-						onChange={(e) => handleDataPointChange(index, e)}
-					/>
+		<div className={styles["container"]}>
+			<h2>Линейный график</h2>
+			<form className={styles["chart-form"]} onSubmit={handleSubmit}>
+				<div className={styles["form-body"]}>
+					<div className={styles["form-parameters-block"]}>
+						<h3>Настройка линейного графика</h3>
+						<div className={styles["parameters-input"]}>
+							<label>Название набора данных:</label>
+							<input
+								type="text"
+								value={datasetLabel}
+								onChange={(e) => setDatasetLabel(e.target.value)}
+							/>
+						</div>
+						<div className={styles["parameters-input"]}>
+							<label>Цвет линии:</label>
+							<input
+								type="text"
+								value={borderColor}
+								onChange={(e) => setBorderColor(e.target.value)}
+							/>
+						</div>
+						<div className={styles["parameters-input"]}>
+							<label>Цвет заливки:</label>
+							<input
+								type="text"
+								value={backgroundColor}
+								onChange={(e) => setBackgroundColor(e.target.value)}
+							/>
+						</div>
+						<div className={styles["form-btns"]}>
+							<button
+								className={styles["add-mark-btn"]}
+								type="button"
+								onClick={addMark}
+							>
+								Добавить метку
+							</button>
+							<button className={styles["make-chart-btn"]} type="submit">
+								Сохранить данные Line Chart
+							</button>
+						</div>
+					</div>
+					<div className={styles["form-data-block"]}>
+						<h3>Данные диаграммы</h3>
+						{labels.map((label, index) => (
+							<div key={index}>
+								<label>{`Метка ${index + 1}:`}</label>
+								<input
+									type="text"
+									value={label}
+									onChange={(e) => handleLabelChange(index, e)}
+								/>
+								<label>Значение:</label>
+								<input
+									type="number"
+									value={dataPoints[index]}
+									onChange={(e) => handleDataPointChange(index, e)}
+								/>
+							</div>
+						))}
+					</div>
 				</div>
-			))}
-			<button type="submit">Сохранить данные Line Chart</button>
-		</form>
+			</form>
+		</div>
 	);
 }
